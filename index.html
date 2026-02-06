@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pakistan Wildlife Foundation | Internship Program</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f7f6;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: #1b5e20;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 20px;
+      padding: 15px 0;
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      padding: 20px 0;
+      display: block;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      color: #81c784;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+      border-radius: 2px;
+    }
+
+    /* Hero Slideshow Section */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide.active {
+      display: block;
+      animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .slide-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .slide-overlay h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .slide-overlay p {
+      font-size: 22px;
+      max-width: 800px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .slide-nav {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+    }
+
+    .slide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slide-dot.active {
+      background: #fff;
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    .slide-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.3);
+      color: #fff;
+      border: none;
+      font-size: 30px;
+      padding: 15px 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .slide-arrow:hover {
+      background: rgba(255,255,255,0.5);
+    }
+
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 38px;
+      color: #1b5e20;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* About Section */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .about-content h3 {
+      font-size: 28px;
+      color: #2e7d32;
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Gallery Section */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      height: 250px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      color: #fff;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    /* Fields Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      border-top: 4px solid #2e7d32;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Why Join Section */
+    .why-join {
+      background: linear-gradient(135deg, #1b5e20, #2e7d32);
+      color: #fff;
+      padding: 80px 20px;
+      margin: 80px 0;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .benefit-item {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .benefit-item h4 {
+      font-size: 20px;
+      margin: 15px 0;
+    }
+
+    /* Application Form */
+    form {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    form input, form textarea, form select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      font-size: 15px;
+      transition: all 0.3s;
+    }
+
+    form input:focus, form textarea:focus, form select:focus {
+      outline: none;
+      border-color: #2e7d32;
+    }
+
+    form button {
+      width: 100%;
+      padding: 16px;
+      background: #2e7d32;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    form button:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+    }
+
+    .apply-btn {
+      display: inline-block;
+      background: #2e7d32;
+      color: #fff;
+      padding: 15px 35px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s;
+    }
+
+    .apply-btn:hover {
+      background: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(46, 125, 50, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: #1b5e20;
+      color: #fff;
+      padding: 40px 20px;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .footer-section p, .footer-section a {
+      color: #c8e6c9;
+      margin-bottom: 10px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .footer-section a:hover {
+      color: #fff;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+      background: #fff;
+      color: #1b5e20;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1b5e20;
+        flex-direction: column;
+        gap: 0;
+        display: none;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 15px 20px;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .slideshow-container {
+        height: 400px;
+      }
+
+      .slide-overlay h1 {
+        font-size: 32px;
+      }
+
+      .slide-overlay p {
+        font-size: 16px;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <img src="image\logo.png" alt="Logo">
+        <span>Pakistan Wildlife & Nature Conservation</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#fields">Fields</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#apply">Apply Now</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SLIDESHOW -->
+  <div class="slideshow-container" id="home">
+    <div class="slide active">
+      <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=1200" alt="Wildlife 1">
+      <div class="slide-overlay">
+        <h1>Pakistan Wildlife & Nature Conservation</h1>
+        <p>Join our 8-month internship program and make a real difference</p>
+      </div>
+    </div>
+    
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1551969014-7d2c4cddf0b6?w=1200" alt="Wildlife 2">
+      <div class="slide-overlay">
+        <h1>Conservation in Action</h1>
+        <p>Hands-on experience in wildlife research and habitat protection</p>
+      </div>
+    </div>
+    
+    <div class="slide">
+      <img src="https://images.unsplash.com/photo-1535083783855-76ae62b2914e?w=1200" alt="Wildlife 3">
+      <div class="slide-overlay">
+        <h1>Shape Your Future</h1>
+        <p>Build your career while preserving nature for generations to come</p>
+      </div>
+    </div>
+
+    <button class="slide-arrow prev" onclick="changeSlide(-1)">❮</button>
+    <button class="slide-arrow next" onclick="changeSlide(1)">❯</button>
+    
+    <div class="slide-nav">
+      <span class="slide-dot active" onclick="currentSlide(0)"></span>
+      <span class="slide-dot" onclick="currentSlide(1)"></span>
+      <span class="slide-dot" onclick="currentSlide(2)"></span>
+    </div>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <div class="section-title">
+      <h2>About the Internship</h2>
+      <p>Build your future while protecting Pakistan's natural heritage</p>
+    </div>
+    <div class="about">
+      <div class="about-content">
+        <h3>Join Pakistan's Leading Wildlife Organization</h3>
+        <p>
+          Pakistan Wildlife Foundation is offering a comprehensive <strong>8-month internship program</strong> designed for passionate students and fresh graduates who want to make a meaningful impact in wildlife conservation and environmental protection.
+        </p>
+        <p>
+          This program provides hands-on experience in field research, conservation projects, community outreach, and wildlife management. You'll work alongside experienced professionals and contribute to real conservation efforts across Pakistan.
+        </p>
+        <p>
+          Whether you're interested in field biology, environmental education, research, or media, we have opportunities that match your passion and skills.
+        </p>
+        <a href="#apply" class="apply-btn">Apply Now</a>
+      </div>
+      <div class="about-image">
+        <!-- Replace with your own image -->
+        <img src="https://images.unsplash.com/photo-1549366021-9f761d450615?w=600" alt="Wildlife Conservation">
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIP FIELDS -->
+  <section id="fields">
+    <div class="section-title">
+      <h2>Internship Fields</h2>
+      <p>Choose the area that matches your passion</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">🦅</div>
+        <h3>Wildlife Conservation</h3>
+        <p>Participate in field surveys, animal protection programs, habitat restoration, and biodiversity studies. Work directly with endangered species and learn conservation techniques.</p>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <h3>Environmental Awareness</h3>
+        <p>Design and implement educational campaigns, conduct community workshops, develop outreach programs, and raise awareness about environmental issues.</p>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Research & Documentation</h3>
+        <p>Collect field data, conduct wildlife surveys, prepare technical reports, analyze conservation data, and contribute to scientific publications.</p>
+      </div>
+      
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <h3>Media & Content</h3>
+        <p>Wildlife photography, videography, social media management, content creation, graphic design, and digital storytelling to promote conservation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY JOIN SECTION -->
+  <section class="why-join">
+    <div class="section-title">
+      <h2 style="color: #fff;">Why Join Us?</h2>
+      <p style="color: #c8e6c9;">Benefits of our internship program</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit-item">
+        <div style="font-size: 48px;">🎓</div>
+        <h4>Certificate of Completion</h4>
+        <p>Recognized certification to boost your career</p>
+      </div>
+      <div class="benefit-item">
+        <div style="font-size: 48px;">💼</div>
+        <h4>Practical Experience</h4>
+        <p>Real-world conservation project involvement</p>
+      </div>
+      <div class="benefit-item">
+        <div style="font-size: 48px;">👥</div>
+        <h4>Expert Mentorship</h4>
+        <p>Learn from experienced conservationists</p>
+      </div>
+      <div class="benefit-item">
+        <div style="font-size: 48px;">🌍</div>
+        <h4>Make an Impact</h4>
+        <p>Contribute to wildlife protection efforts</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY SECTION -->
+  <section id="gallery">
+    <div class="section-title">
+      <h2>Our Work in Action</h2>
+      <p>See what our interns and team accomplish</p>
+    </div>
+    <div class="gallery">
+      <!-- You can replace these placeholder images with your own -->
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1544552866-d3ed42536cfd?w=400" alt="Field Work">
+        <div class="gallery-overlay">
+          <h4>Field Research</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?w=400" alt="Wildlife">
+        <div class="gallery-overlay">
+          <h4>Wildlife Monitoring</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=400" alt="Conservation">
+        <div class="gallery-overlay">
+          <h4>Habitat Protection</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Education">
+        <div class="gallery-overlay">
+          <h4>Community Education</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1603349206295-dde20617cb6a?w=400" alt="Team">
+        <div class="gallery-overlay">
+          <h4>Team Collaboration</h4>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1516934024742-b461fba47600?w=400" alt="Nature">
+        <div class="gallery-overlay">
+          <h4>Conservation Success</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section id="apply">
+    <div class="section-title">
+      <h2>Apply for Internship</h2>
+      <p>Start your conservation journey today</p>
+    </div>
+    <form>
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" placeholder="Enter your full name" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" placeholder="your.email@example.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" placeholder="+92 300 1234567" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Education Level *</label>
+        <select required>
+          <option value="">Select your education level</option>
+          <option>Bachelor's Student</option>
+          <option>Bachelor's Graduate</option>
+          <option>Master's Student</option>
+          <option>Master's Graduate</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Preferred Internship Field *</label>
+        <select required>
+          <option value="">Select your preferred field</option>
+          <option>Wildlife Conservation</option>
+          <option>Environmental Awareness</option>
+          <option>Research & Documentation</option>
+          <option>Media & Content Creation</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Why do you want to join this internship? *</label>
+        <textarea rows="5" placeholder="Tell us about your motivation and goals..." required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label>Upload Your CV/Resume (PDF only)</label>
+        <input type="file" accept=".pdf">
+      </div>
+      
+      <button type="submit">Submit Application</button>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About PWF</h3>
+        <p>Pakistan Wildlife Foundation is dedicated to protecting and preserving Pakistan's rich biodiversity and natural heritage.</p>
+        <div class="social-links">
+          <a href="#">📘</a>
+          <a href="#">📷</a>
+          <a href="#">🐦</a>
+          <a href="#">📧</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#about">About Us</a>
+        <a href="#fields">Internship Fields</a>
+        <a href="#apply">Apply Now</a>
+        <a href="#contact">Contact</a>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p>📍 Islamabad, Pakistan</p>
+        <p>📞 +92 305 7360534</p>
+        <p>✉️ info@pawildlife.org</p>
+        <p>🌐 www.pawildlife.org</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>© 2026 Pakistan Wildlife Foundation | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Menu Toggle
+    function toggleMenu() {
+      const navLinks = document.getElementById('navLinks');
+      navLinks.classList.toggle('active');
+    }
+
+    // Slideshow Functionality
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    function showSlide(index) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      if (index >= slides.length) currentSlideIndex = 0;
+      if (index < 0) currentSlideIndex = slides.length - 1;
+      
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function changeSlide(direction) {
+      currentSlideIndex += direction;
+      showSlide(currentSlideIndex);
+    }
+
+    function currentSlide(index) {
+      currentSlideIndex = index;
+      showSlide(currentSlideIndex);
+    }
+
+    // Auto-advance slides every 5 seconds
+    setInterval(() => {
+      currentSlideIndex++;
+      showSlide(currentSlideIndex);
+    }, 5000);
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Close mobile menu if open
+          document.getElementById('navLinks').classList.remove('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
